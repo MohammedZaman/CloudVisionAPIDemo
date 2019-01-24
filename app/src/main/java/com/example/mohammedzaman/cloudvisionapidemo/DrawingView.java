@@ -1,3 +1,21 @@
+/*
+ * DrawingView.java
+ *
+ * @author Mohammed Zaman
+ *
+ * A custom View class to overlay the image for the bounding Boxes to be drawn
+ *
+ * This class requires a bitmap to be set in order for the bounding boxes to be drawn.
+ * Shapes have to be added to the List<> so they can be looped out and drawn on the canvas
+ * to highlight the faces detected.
+ *
+ *
+ *
+ */
+
+
+
+
 package com.example.mohammedzaman.cloudvisionapidemo;
 
 import android.content.Context;
@@ -5,18 +23,20 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class DrawingView extends View {
+
     private Paint paint = new Paint();
+    private List<Square> shape = new ArrayList<>();
+    private Bitmap bitmap;
+
+
+
+
 
     public Bitmap getBitmap() {
         return bitmap;
@@ -25,8 +45,6 @@ public class DrawingView extends View {
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
-
-    private Bitmap bitmap;
 
     public List<Square> getShape() {
         return shape;
@@ -38,10 +56,9 @@ public class DrawingView extends View {
 
     public void addShape(Square square){
         this.shape.add(square);
+    }
 
-    };
 
-    private List<Square> shape = new ArrayList<>();
     public DrawingView(Context context) {
         super(context);
 
@@ -67,8 +84,6 @@ public class DrawingView extends View {
     @Override
     protected void onDraw(Canvas canvas ) {
         super.onDraw(canvas);
-
-
         paint.setColor(Color.RED);
         paint.setStrokeWidth(5f);
         if(bitmap != null) {
@@ -76,15 +91,16 @@ public class DrawingView extends View {
 
 
             for (Square aShape : shape) {
-                for (int i = 0; i < aShape.getVertices().size(); i++) {
-
-                    s.drawLine(aShape.getVertices().get(0).x, aShape.getVertices().get(0).y, aShape.getVertices().get(1).x, aShape.getVertices().get(1).y, paint);
-                    s.drawLine(aShape.getVertices().get(1).x, aShape.getVertices().get(1).y, aShape.getVertices().get(2).x, aShape.getVertices().get(2).y, paint);
-                    s.drawLine(aShape.getVertices().get(2).x, aShape.getVertices().get(2).y, aShape.getVertices().get(3).x, aShape.getVertices().get(3).y, paint);
-                    s.drawLine(aShape.getVertices().get(3).x, aShape.getVertices().get(3).y, aShape.getVertices().get(0).x, aShape.getVertices().get(0).y, paint);
+                // looping each Square object
+                for (int i = 0; i < aShape.getVertices().size();i++) {
+                    if(aShape.getVertices().size() == 4) {
+                        // looping the vertices into drawLine to create Bounding box
+                        s.drawLine(aShape.getVertices().get(0).x, aShape.getVertices().get(0).y, aShape.getVertices().get(1).x, aShape.getVertices().get(1).y, paint);
+                        s.drawLine(aShape.getVertices().get(1).x, aShape.getVertices().get(1).y, aShape.getVertices().get(2).x, aShape.getVertices().get(2).y, paint);
+                        s.drawLine(aShape.getVertices().get(2).x, aShape.getVertices().get(2).y, aShape.getVertices().get(3).x, aShape.getVertices().get(3).y, paint);
+                        s.drawLine(aShape.getVertices().get(3).x, aShape.getVertices().get(3).y, aShape.getVertices().get(0).x, aShape.getVertices().get(0).y, paint);
+                    }
                 }
-
-
             }
         }
 
@@ -103,33 +119,6 @@ public class DrawingView extends View {
     public void clear(){
         this.shape.clear();
     }
-
-//    public BitmapDrawable getCanavs(Bitmap sbitmap){
-//
-//
-//        paint.setColor(Color.RED);
-//        paint.setStrokeWidth(5f);
-//
-//
-//        Bitmap tempBitmap = Bitmap.createBitmap(sbitmap.getWidth(), sbitmap.getHeight(), Bitmap.Config.RGB_565);
-//        Canvas tempCanvas = new Canvas(tempBitmap);
-//        tempCanvas.drawBitmap(sbitmap, 0, 0, null);
-//
-//        for(Square aShape : shape ){
-//            for(int i = 0; i < aShape.getVertices().size(); i++) {
-//
-//                tempCanvas.drawLine(aShape.getVertices().get(0).x, aShape.getVertices().get(0).y, aShape.getVertices().get(1).x, aShape.getVertices().get(1).y,paint);
-//                tempCanvas.drawLine(aShape.getVertices().get(1).x, aShape.getVertices().get(1).y, aShape.getVertices().get(2).x, aShape.getVertices().get(2).y,paint);
-//                tempCanvas.drawLine(aShape.getVertices().get(2).x, aShape.getVertices().get(2).y, aShape.getVertices().get(3).x,aShape.getVertices().get(3).y,paint);
-//                tempCanvas.drawLine(aShape.getVertices().get(3).x, aShape.getVertices().get(3).y, aShape.getVertices().get(0).x,aShape.getVertices().get(0).y,paint);
-//            }
-//
-//
-//        }
-//
-//
-//        return new BitmapDrawable(getResources(), tempBitmap);
-//    }
 
 
 
