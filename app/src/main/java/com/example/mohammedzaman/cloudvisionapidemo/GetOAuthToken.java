@@ -1,13 +1,27 @@
+/*
+ * GetOAuthToken.java
+ *
+ * @author Mohammed Zaman
+ *
+ * A class to retrieve access token for Google Cloud Vision
+ *
+ * this class requires a environment variable to set called GOOGLE_APPLICATION_CREDENTIALS.
+ * This variable should consist of the file path of a JSON file (service account key file)
+ * downloaded from Google cloud console. The SHA-1 signing-certificate fingerprint on the
+ * Google cloud console needs to set up for access to the API.The package which uses the
+ * API needs to be stated in the Google cloud console or the access will be denied.
+ *
+ */
+
+
 package com.example.mohammedzaman.cloudvisionapidemo;
 
 import android.accounts.Account;
 import android.app.Activity;
 import android.os.AsyncTask;
-
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
-
 import java.io.IOException;
 
 public class GetOAuthToken extends AsyncTask<Void, Void, Void> {
