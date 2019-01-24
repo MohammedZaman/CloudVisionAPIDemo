@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/crop_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="false"
+        android:orientation="vertical"
+        android:padding="10dp">
+        android:scrollbarStyle="outsideOverlay"
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            tools:context=".MainActivity">
+
+
+
+
+            <TextView
+                android:id="@+id/selected_image_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="Selected Image "
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/selected_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/selected_image_txt"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
+
+            <ImageView
+                android:id="@+id/overlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/selected_image"
+                android:layout_centerHorizontal="true"></ImageView>
+
+
+            <TextView
+                android:id="@+id/labels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/selected_image"
+                android:layout_marginTop="10dp"
+                android:text="Labels:"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_label_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labels"
+                android:layout_marginTop="10dp"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/texts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_label_results"
+                android:layout_marginTop="10dp"
+                android:text="Texts:"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_texts_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/texts"
+                android:layout_marginTop="10dp"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/angryLikeliness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_texts_results"
+                android:layout_marginTop="10dp"
+                android:text="Anger Likeliness"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/angrylikeliness_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/angryLikeliness"
+                android:layout_marginTop="10dp"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/joyLikeliness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/angrylikeliness_results"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Joy Likeliness"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/joylikeliness_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/joyLikeliness"
+                android:layout_marginTop="10dp"
+                android:text="-" />
+
+            <TextView
+
+                android:id="@+id/bound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/joylikeliness_results"
+                android:layout_marginTop="20dp"
+                android:text="BoundBox"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bound_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bound"
+                android:layout_marginTop="20dp"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/facesDetected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bound_results"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Faces Detected: " />
+
+            <Button
+                android:id="@+id/select_image_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/facesDetected"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="10dp"
+                android:text="Choose an Image" />
+
+            <view
+                android:id="@+id/dView"
+                class="com.example.mohammedzaman.cloudvisionapidemo.DrawingView"
+                id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@+id/selected_image_txt"
+                android:layout_alignBottom="@+id/labels"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-5dp"
+                android:theme="@android:style/Theme.Translucent" />
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+</FrameLayout>
